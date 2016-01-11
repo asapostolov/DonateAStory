@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace BasicWebsite {
@@ -10,8 +11,9 @@ namespace BasicWebsite {
 
         public static void InitFromFile() {
             var fileLines  = File.ReadAllLines( HttpContext.Current.Server.MapPath( "Data.txt" ) );
-            string[] reads = new string[] { "Четец:", "Чете:", "Прочит:" };
-            string[] otherBeginings = new string[] { "Издателство/година на издаване–създаване:", "Брой файлове:", "Прослушване:" };
+            string[] reads = new string[] { "Четец:", "Чете:", "Прочит:", "четец:" };
+            string[] otherBeginings = new string[] { "Издателство/година на издаване–създаване:", "Издателство/година на издаване/създаване:", "Брой файлове:", "Прослушване:", "Изд.", "Издателство" };
+            string[] startOfList = new string[] { "„", "\"", "«" };
 
             RecordingItem item = new RecordingItem();
             var notFound = new List<string>();
@@ -39,8 +41,27 @@ namespace BasicWebsite {
                     } else if ( reads.Any( x => line5.StartsWith( x ) ) || otherBeginings.Any( x => line5.StartsWith( x ) )) {
                         item.Author = line2;
                         item.Title = line3;
-                        item.Category = line4;
+                        if ( line4.ToLowerInvariant().StartsWith( "от" ) ) {
+                            item.FromBook = line4;
+                        } else {
+                            item.Category = line4;
+                        }
+                        
                         i += 3;
+                    } else if ( startOfList.Any(x=> line4.StartsWith( x ))) {
+                        item.Author = line2;
+                        item.Title = line3;
+
+                        var j = 3;
+                        var notesBuilder = new StringBuilder();
+                        var newline = line4;
+                        while ( startOfList.Any( x => newline.StartsWith( x ) ) ) {
+                            notesBuilder.AppendLine( newline );
+                            j++;
+                            newline = fileLines[i + j];
+                        }
+                        item.ItemList = notesBuilder.ToString();
+                        i += j;
                     }
                     continue;
                 }
@@ -59,7 +80,8 @@ namespace BasicWebsite {
                 var addedToLib = new string[]{
                     "Добавено в Библиотеката:".ToLowerInvariant(),
                     "Добавенa в Библиотеката:".ToLowerInvariant(),
-                    "добавена в библиотеката:"
+                    "добавена в библиотеката:",
+                    "Добавено в каталога:".ToLowerInvariant()
                 };
                 var lowLine = line.ToLowerInvariant();
                 if ( addedToLib.Any(x=>lowLine.StartsWith(x)) ) {
@@ -78,7 +100,8 @@ namespace BasicWebsite {
                     item.ListenedBy = item.Installation = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
-                if ( line.StartsWith( "Източник:" ) ) {
+                //var sources = new string[] { "източник :" };
+                if ( line.ToLowerInvariant().StartsWith( "Източник".ToLowerInvariant() ) ) {
                     item.Source = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
@@ -86,23 +109,71 @@ namespace BasicWebsite {
                     item.FilesCount = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
-                if ( line.StartsWith( "Забележки:" ) ) {
+                if ( line.StartsWith( "Забележки" ) ) {
                     item.Notes = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
                 var publishingStrings = new string[]{
                     "Издателство/година на издаване/създаване:",
                     "Издателство/година на издаване–създаване:",
+                    "Изд.",
+                    "Издателство"
                     
                 };
                 if ( publishingStrings.Any( x => line.StartsWith( x ) ) ) {
-                    item.PublishingHouseYear = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
+                    var index = line.IndexOf( ":" ) >= 0 ? line.IndexOf( ":" )
+                        : line.IndexOf( "." ) >= 0 ? line.IndexOf( "." ) : line.IndexOf( " " );
+                    item.PublishingHouseYear = line.Substring( index ).Trim( ' ', ':', '.' );
+                    continue;
+                }
+                if ( line.StartsWith( "http" ) ) {
+                    item.Url = line;
                     continue;
                 }
                 notFound.Add( line );
             }
+            Recordings = list;
         }
 
+        public static void InitVersion2() {
+            var fileLines = File.ReadAllLines( HttpContext.Current.Server.MapPath( "Data.txt" ) );
+
+            RecordingItem item = new RecordingItem();
+            var notFound = new List<string>();
+
+            //var newlineIndexes = fileLines)
+
+            var list = new List<RecordingItem>();
+
+            var newLines = fileLines.IndexesWhere( x => String.IsNullOrWhiteSpace( x ) ).ToList();
+
+            var data = new List<List<string>>();
+
+            var current = 0;
+            foreach ( var line in newLines ) {
+                data.Add( fileLines.Skip( current ).Take( line - current ).Where(x=>!String.IsNullOrWhiteSpace(x)).ToList() );
+                current = line;
+            }
+
+            FileData = data.Select( x => new FileDataItem() {
+                Lines = x,
+                Number = Int32.Parse( x[0].Trim( '.', ' ' ) )
+            } ).ToList();
+        }
+
+        public static List<FileDataItem> FileData { get; set; }
+    }
+
+    public static class Extensions {
+        public static IEnumerable<int> IndexesWhere<T>( this IEnumerable<T> source, Func<T, bool> predicate ) {
+            int index = 0;
+            foreach ( T element in source ) {
+                if ( predicate( element ) ) {
+                    yield return index;
+                }
+                index++;
+            }
+        }
     }
 
     public class RecordingItem {
@@ -126,7 +197,17 @@ namespace BasicWebsite {
         public string PublishingHouseYear { get; set; }
 
         public string Notes { get; set; }
+
+        public string Url { get; set; }
+
+        public string ItemList { get; set; }
+
+        public string FromBook { get; set; }
     }
 
+    public class FileDataItem {
+        public int Number { get; set; }
+        public List<string> Lines { get; set; }
+    }
 
 }

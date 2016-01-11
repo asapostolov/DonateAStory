@@ -1,6 +1,12 @@
-﻿@{
+﻿@using BasicWebsite;
+@using reader = BasicWebsite.RecordingsReader;
+
+@{
     Layout = null;
-    BasicWebsite.RecordingsReader.InitFromFile();
+    reader.InitFromFile();
+    reader.InitVersion2();
+
+    
 }
 
 <!DOCTYPE html>
@@ -8,11 +14,50 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
     <title></title>
 </head>
 <body>
-    <div>
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <label for="search">Търси в библиотеката</label>
+                <input type="text" id="search" />
+                <div id="count"></div>
+            </div>
+            <div class="col-md-10">
+                <ul>
+                    @foreach ( var item in BasicWebsite.RecordingsReader.FileData ) {
+                        <li>
+                            @foreach ( var row in item.Lines ) {
+                                <div>@row</div>
+                            }
+                        </li>
+                    }
+
+                </ul>
+            </div>
+            <div class="col-md-2">
+                @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ) ) {
+                    <div>@(auth.Key??"Неизвестен") @auth.Count()</div>
+                }
+            </div>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script>
+        jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+        var $list = $("ul");
+        $("#search").on("keyup", function () {
+            $("li").hide();
+            $("li:Contains(" + $(search).val() + ")").show();
+            $("#count").html($("li:visible").length + " Намерени записа");
+        });
+    </script>
 </body>
 </html>
+
