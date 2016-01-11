@@ -155,7 +155,7 @@ namespace BasicWebsite {
                 current = line;
             }
 
-            FileData = data.Select( x => new FileDataItem() {
+            FileData = data.Where(x=>x.Count>0).Select( x => new FileDataItem() {
                 Lines = x,
                 Number = Int32.Parse( x[0].Trim( '.', ' ' ) )
             } ).ToList();
