@@ -162,6 +162,27 @@ namespace BasicWebsite {
         }
 
         public static List<FileDataItem> FileData { get; set; }
+
+        public static Dictionary<int, string> RecordingLinks { get; set; }
+        public static void InitFileLinks() {
+            var fileLines = File.ReadAllLines( HttpContext.Current.Server.MapPath( "List.txt" ) );
+
+            var dict = new Dictionary<int, string>();
+
+            foreach ( var line in fileLines ) {
+                var data = line.ToString();
+
+                data = data.Replace( "<li><a href=\"", "" );
+
+                var num = data.Substring(0, data.IndexOf( '.' ) ).Replace("%20","");
+
+                var link = data.Substring(0, data.IndexOf( '\"' ) );
+
+                dict.Add( Int32.Parse( num ), link );
+            }
+            
+            RecordingLinks = dict;
+        }
     }
 
     public static class Extensions {

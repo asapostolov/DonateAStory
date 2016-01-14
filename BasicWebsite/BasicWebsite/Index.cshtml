@@ -5,7 +5,8 @@
     Layout = null;
     reader.InitFromFile();
     reader.InitVersion2();
-
+    reader.InitFileLinks();
+    var baseLink = "http://podarimiistoria.net/knigi_zip/";
     
 }
 
@@ -29,7 +30,12 @@
                 <ul>
                     @foreach ( var item in BasicWebsite.RecordingsReader.FileData ) {
                         <li>
-                            @foreach ( var row in item.Lines ) {
+                            <div>
+                                <a href="@baseLink@reader.RecordingLinks[item.Number]">
+                                    @item.Lines[0] @item.Lines[1]
+                                </a>
+                            </div>
+                            @foreach ( var row in item.Lines.Skip( 2 ) ) {
                                 <div>@row</div>
                             }
                         </li>
@@ -38,7 +44,7 @@
                 </ul>
             </div>
             <div class="col-md-2">
-                @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ) ) {
+                @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ).OrderByDescending(x=>x.Count()) ) {
                     <div>@(auth.Key??"Неизвестен") @auth.Count()</div>
                 }
             </div>

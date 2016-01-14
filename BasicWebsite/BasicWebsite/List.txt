@@ -604,4 +604,3 @@
 <li><a href="97.%20jak%20prever%20-%204%20stihotvorenia.zip"> 97. jak prever - 4 stihotvorenia.zip</a></li>
 <li><a href="98.%20slivi%20za%20smet.zip"> 98. slivi za smet.zip</a></li>
 <li><a href="99.jan%20dio%20lafonten%20-%20basni%20-%20chast%201%20i%202.zip"> 99.jan dio lafonten - basni - chast 1 i 2.zip</a></li>
-<li><a href="profesionalni/"> profesionalni/</a></li>
