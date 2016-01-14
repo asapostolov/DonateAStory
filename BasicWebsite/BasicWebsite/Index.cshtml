@@ -24,9 +24,11 @@
             <div class="col-md-12">
                 <label for="search">Търси в библиотеката</label>
                 <input type="text" id="search" />
+                <input type="button" id="searchTrigger" value="Търси" />
+                <input type="button" id="searchCleaner" value="Изчисти Търсенето" style="display:none" />
                 <div id="count"></div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <ul>
                     @foreach ( var item in BasicWebsite.RecordingsReader.FileData ) {
                         <li>
@@ -43,7 +45,7 @@
 
                 </ul>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ).OrderByDescending(x=>x.Count()) ) {
                     <div>@(auth.Key??"Неизвестен") @auth.Count()</div>
                 }
@@ -58,11 +60,33 @@
             };
         });
         var $list = $("ul");
-        $("#search").on("keyup", function () {
-            $("li").hide();
-            $("li:Contains(" + $(search).val() + ")").show();
-            $("#count").html($("li:visible").length + " Намерени записа");
+        var $trigger = $("#searchTrigger");
+        var $cleaner = $("#searchCleaner");
+        var $search = $("#search");
+        $search.on("keypress", function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                makeSelection();
+            }
         });
+        $trigger.on("click", function () {
+            makeSelection();
+        });
+        $cleaner.on("click", function () {
+            $("li").show();
+            $("#count").html('');
+            $cleaner.hide();
+        });
+        function makeSelection(){
+            if ($search.val()) {
+                $("li").hide();
+                $("li:Contains(" + $search.val() + ")").show();
+                $("#count").html($("li:visible").length + " Намерени записа за '"+$search.val()+"'");
+                $search.val('');
+                $cleaner.show();
+            }
+        }
     </script>
 </body>
 </html>
