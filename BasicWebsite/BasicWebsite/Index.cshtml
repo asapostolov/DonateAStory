@@ -22,6 +22,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h1>Библиотека на проекта "Подари ми история"</h1>
+                <p>Библиотеката съдържа общо @reader.FileData.Count звукови записа на произведения записани и дарени от доброволци за незрящи хора</p>
+            </div>
+            <div class="col-md-12">
                 <label for="search">Търси в библиотеката</label>
                 <input type="text" id="search" />
                 <input type="button" id="searchTrigger" value="Търси" />
@@ -29,25 +33,30 @@
                 <div id="count"></div>
             </div>
             <div class="col-md-9">
-                <ul>
-                    @foreach ( var item in BasicWebsite.RecordingsReader.FileData ) {
-                        <li>
-                            <div>
-                                <a href="@baseLink@reader.RecordingLinks[item.Number]">
-                                    @item.Lines[0] @item.Lines[1]
-                                </a>
+                
+                    @foreach( var item in BasicWebsite.RecordingsReader.FileData ) {
+                        //<li>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <a href="@baseLink@reader.RecordingLinks[item.Number]">
+                                        @item.Lines[0] @item.Lines[1]
+                                    </a>
+                                    @foreach( var row in item.Lines.Skip( 2 ) ) {
+                                        <div>@row</div>
+                                    }
+                                </div>
                             </div>
-                            @foreach ( var row in item.Lines.Skip( 2 ) ) {
-                                <div>@row</div>
-                            }
-                        </li>
+                            
+                        //</li>
                     }
 
-                </ul>
+                
             </div>
             <div class="col-md-3">
                 @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ).OrderByDescending(x=>x.Count()) ) {
-                    <div>@(auth.Key??"Неизвестен") @auth.Count()</div>
+                    <div>
+                        <a href="#" class="author" data-value="@auth.Key">@(auth.Key ?? "Неизвестен") - @auth.Count() записа</a> 
+                    </div>
                 }
             </div>
         </div>
@@ -67,26 +76,30 @@
             var key = e.which;
             if (key == 13)  // the enter key code
             {
-                makeSelection();
+                makeSelection($search.val());
             }
         });
         $trigger.on("click", function () {
-            makeSelection();
+            makeSelection($search.val());
         });
         $cleaner.on("click", function () {
-            $("li").show();
+            $(".panel").show();
             $("#count").html('');
             $cleaner.hide();
         });
-        function makeSelection(){
-            if ($search.val()) {
-                $("li").hide();
-                $("li:Contains(" + $search.val() + ")").show();
-                $("#count").html($("li:visible").length + " Намерени записа за '"+$search.val()+"'");
+        function makeSelection(string){
+            if (string) {
+                $(".panel").hide();
+                $(".panel:Contains(" + string + ")").show();
+                $("#count").html($(".panel:visible").length + " Намерени записа за '"+string+"'");
                 $search.val('');
                 $cleaner.show();
             }
         }
+        $(".author").on("click", function () {
+            makeSelection($(this).data('value'));
+        });
+
     </script>
 </body>
 </html>
