@@ -491,7 +491,7 @@
 <li><a href="540.%20Ivan%20Bozukov%20-%20Likyt%20na%20istinata.rar"> 540. Ivan Bozukov - Likyt na istinata.rar</a></li>
 <li><a href="541.%20Ivan%20Bozukov%20-%20Nai-golqmoto%20syrce.rar"> 541. Ivan Bozukov - Nai-golqmoto syrce.rar</a></li>
 <li><a href="542.%20Ivan%20Bozukov%20-%20Ugasnalite%20zvezdi.rar"> 542. Ivan Bozukov - Ugasnalite zvezdi.rar</a></li>
-<li><a href="543.%20%d0%90%d1%81%d0%b5%d0%bd%20%d0%a0%d0%b0%d0%b7%d1%86%d0%b2%d0%b5%d1%82%d0%bd%d0%b8%d0%ba%d0%be%d0%b2%20%d0%a0%d0%be%d0%b6%d0%b4%d0%b5%d1%81%d1%82%d0%b2%d0%be.rar"> 543. ÐÑÐµÐ½ Ð&nbsp;Ð°Ð·Ñ†Ð²ÐµÑ‚Ð½Ð¸ÐºÐ¾Ð² Ð&nbsp;Ð¾Ð¶Ð´ÐµÑÑ‚Ð²Ð¾.rar</a></li>
+<li><a href="543.%20%d0%90%d1%81%d0%b5%d0%bd%20%d0%a0%d0%b0%d0%b7%d1%86%d0%b2%d0%b5%d1%82%d0%bd%d0%b8%d0%ba%d0%be%d0%b2%20%d0%a0%d0%be%d0%b6%d0%b4%d0%b5%d1%81%d1%82%d0%b2%d0%be.rar"> 543. ÐÑÐµÐ½ Ð Ð°Ð·Ñ†Ð²ÐµÑ‚Ð½Ð¸ÐºÐ¾Ð² Ð Ð¾Ð¶Ð´ÐµÑÑ‚Ð²Ð¾.rar</a></li>
 <li><a href="544.%20%d0%95%d0%bb%d0%b8%d1%81%d0%b0%d0%b2%d0%b5%d1%82%d0%b0%20%d0%91%d0%b0%d0%b3%d1%80%d1%8f%d0%bd%d0%b0%20%d0%92%d0%b5%d0%bb%d0%b8%d0%ba%d0%b4%d0%b5%d0%bd%d1%81%d0%ba%d0%b0%20%d0%bd%d0%be%d1%89.rar"> 544. Ð•Ð»Ð¸ÑÐ°Ð²ÐµÑ‚Ð° Ð‘Ð°Ð³Ñ€ÑÐ½Ð° Ð’ÐµÐ»Ð¸ÐºÐ´ÐµÐ½ÑÐºÐ° Ð½Ð¾Ñ‰.rar</a></li>
 <li><a href="545.%20%d0%9d.%20%d0%a1%d0%b0%d0%b2%d0%be%d0%b2%20%d0%9f%d1%80%d0%b8%d1%82%d1%87%d0%b0%20%d0%b7%d0%b0%20%d0%bc%d0%b8%d1%82%d0%b0%d1%80%d1%8f%20%d0%b8%20%d1%84%d0%b0%d1%80%d0%b8%d1%81%d0%b5%d1%8f.rar"> 545. Ð. Ð¡Ð°Ð²Ð¾Ð² ÐŸÑ€Ð¸Ñ‚Ñ‡Ð° Ð·Ð° Ð¼Ð¸Ñ‚Ð°Ñ€Ñ Ð¸ Ñ„Ð°Ñ€Ð¸ÑÐµÑ.rar</a></li>
 <li><a href="546.%20%d0%9d%d0%b8%d0%ba%d0%be%d0%bb%d0%b0%20%d0%a4%d1%83%d1%80%d0%bd%d0%b0%d0%b4%d0%b6%d0%b8%d0%b5%d0%b2%20%d0%9a%d0%be%d0%bb%d0%b5%d0%b4%d0%b0.rar"> 546. ÐÐ¸ÐºÐ¾Ð»Ð° Ð¤ÑƒÑ€Ð½Ð°Ð´Ð¶Ð¸ÐµÐ² ÐšÐ¾Ð»ÐµÐ´Ð°.rar</a></li>
@@ -562,7 +562,16 @@
 <li><a href="604.%20Hose%20Ortega-i-Gaset%20-%20Intelektualecyt%20i%20drugiyat.zip"> 604. Hose Ortega-i-Gaset - Intelektualecyt i drugiyat.zip</a></li>
 <li><a href="605.%20Ivan%20Bozukov%20-%20Rykata%20na%20kapriznata%20princesa.zip"> 605. Ivan Bozukov - Rykata na kapriznata princesa.zip</a></li>
 <li><a href="606.%20Ivan%20Bozukov%20-%20Trimata%20razboynika%20i%20zlatnata%20lyuspa.zip"> 606. Ivan Bozukov - Trimata razboynika i zlatnata lyuspa.zip</a></li>
+<li><a href="607.%20chenalingi%20chrez%20prof.%20djefri%20hopi.zip"> 607. chenalingi chrez prof. djefri hopi.zip</a></li>
+<li><a href="608.%20dilian%20elenkov%20-%20shtastie.zip"> 608. dilian elenkov - shtastie.zip</a></li>
+<li><a href="609.%20djefri%20archur%20-%20stara%20lubov.zip"> 609. djefri archur - stara lubov.zip</a></li>
 <li><a href="61.%20Bylgarska%20narodna%20prikazka%20-%20Chovek%20vyara%20nyama.zip"> 61. Bylgarska narodna prikazka - Chovek vyara nyama.zip</a></li>
+<li><a href="610.%20Ivan%20Bozukov%20-%20Cenata%20na%20nakazanoto%20blagodeyanie.zip"> 610. Ivan Bozukov - Cenata na nakazanoto blagodeyanie.zip</a></li>
+<li><a href="611.%20elisaveta%20bagriana%20-%20stihotvorenia.zip"> 611. elisaveta bagriana - stihotvorenia.zip</a></li>
+<li><a href="612.%20hulio%20kortasar%20-%20poezia.zip"> 612. hulio kortasar - poezia.zip</a></li>
+<li><a href="613.%20karolin%20repchuk%20-%20malkoto%20elenche.zip"> 613. karolin repchuk - malkoto elenche.zip</a></li>
+<li><a href="614.%20Maikul%20Bond%20-%20Padingtun%20v%20zooparka.zip"> 614. Maikul Bond - Padingtun v zooparka.zip</a></li>
+<li><a href="615.%20siu%20haris%20-%20malkoto%20tiulenche.zip"> 615. siu haris - malkoto tiulenche.zip</a></li>
 <li><a href="62.%20O.Henry_Darovete_na_vlahvite.zip"> 62. O.Henry_Darovete_na_vlahvite.zip</a></li>
 <li><a href="63.%20ivan%20bozukov%20-%20chovekut,%20koito%20govorel%20istinata.zip"> 63. ivan bozukov - chovekut, koito govorel istinata.zip</a></li>
 <li><a href="64.%20zheyms_Hadli_Cheys_-_Chuk_chuk_Koy_e_tam.zip"> 64. zheyms_Hadli_Cheys_-_Chuk_chuk_Koy_e_tam.zip</a></li>

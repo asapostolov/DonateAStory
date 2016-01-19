@@ -31,7 +31,9 @@ namespace BasicWebsite {
                     var line3 = fileLines[i + 2];
                     var line4 = fileLines[i + 3];
                     var line5 = fileLines[i + 4];
-                    if ( reads.Any( x => line3.StartsWith( x ) ) || otherBeginings.Any( x => line3.StartsWith( x ) ) ) {
+                    if ( line2.StartsWith( "Автор:" ) ) {
+                        continue;
+                    } else if ( reads.Any( x => line3.StartsWith( x ) ) || otherBeginings.Any( x => line3.StartsWith( x ) ) ) {
                         item.Title = line2;
                         i++;
                     } else if ( reads.Any( x => line4.StartsWith( x ) ) || otherBeginings.Any( x => line4.StartsWith( x ) )) {
@@ -77,6 +79,18 @@ namespace BasicWebsite {
                     item.ReadBy = line.Substring( line.IndexOf( ":" ) ).Trim( ' ',':' );
                     continue;
                 }
+                if ( line.StartsWith( "Автор:" ) ) {
+                    item.Author = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
+                    continue;
+                }
+                var titles = new string[]{
+                    "Заглавие:",
+                    "Произведение:"
+                };
+                if ( titles.Any(x=> line.StartsWith( x )) ) {
+                    item.Title = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
+                    continue;
+                }
                 var addedToLib = new string[]{
                     "Добавено в Библиотеката:".ToLowerInvariant(),
                     "Добавенa в Библиотеката:".ToLowerInvariant(),
@@ -90,6 +104,10 @@ namespace BasicWebsite {
                 }
                 if ( line.StartsWith( "Прослушване:" ) ) {
                     item.ListenedBy = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
+                    continue;
+                }
+                if ( line.StartsWith( "Раздел/категория:" ) ) {
+                    item.Category = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
                 if ( line.StartsWith( "Монтаж:" ) ) {
