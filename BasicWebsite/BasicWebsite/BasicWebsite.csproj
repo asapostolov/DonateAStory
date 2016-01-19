@@ -85,7 +85,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\index-with-links.html" />
     <Content Include="Index.cshtml" />
+    <Content Include="html\index.html" />
     <Content Include="List.txt" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
