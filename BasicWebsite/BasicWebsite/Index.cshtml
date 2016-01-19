@@ -7,7 +7,7 @@
     reader.InitVersion2();
     reader.InitFileLinks();
     var baseLink = "http://podarimiistoria.net/knigi_zip/";
-    
+    var showLinks = false;
 }
 
 <!DOCTYPE html>
@@ -33,29 +33,34 @@
                 <div id="count"></div>
             </div>
             <div class="col-md-9">
-                
-                    @foreach( var item in BasicWebsite.RecordingsReader.FileData ) {
-                        //<li>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <a href="@baseLink@reader.RecordingLinks[item.Number]">
-                                        @item.Lines[0] @item.Lines[1]
-                                    </a>
-                                    @foreach( var row in item.Lines.Skip( 2 ) ) {
-                                        <div>@row</div>
-                                    }
-                                </div>
-                            </div>
-                            
-                        //</li>
-                    }
 
-                
+                @foreach ( var item in BasicWebsite.RecordingsReader.FileData ) {
+                    //<li>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @if ( showLinks ) {
+                                <a href="@baseLink@reader.RecordingLinks[item.Number]">
+                                    @item.Lines[0] @item.Lines[1]
+                                </a>
+                            } else {
+                                    @item.Lines[0] @item.Lines[1]
+                            }
+                            
+                            @foreach ( var row in item.Lines.Skip( 2 ) ) {
+                                <div>@row</div>
+                            }
+                        </div>
+                    </div>
+
+                    //</li>
+                }
+
+
             </div>
             <div class="col-md-3">
-                @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ).OrderByDescending(x=>x.Count()) ) {
+                @foreach ( var auth in reader.Recordings.GroupBy( x => x.Author ).OrderByDescending( x => x.Count() ) ) {
                     <div>
-                        <a href="#" class="author" data-value="@auth.Key">@(auth.Key ?? "Неизвестен") - @auth.Count() записа</a> 
+                        <a href="#" class="author" data-value="@auth.Key">@(auth.Key ?? "Неизвестен") - @auth.Count() записа</a>
                     </div>
                 }
             </div>
@@ -87,11 +92,11 @@
             $("#count").html('');
             $cleaner.hide();
         });
-        function makeSelection(string){
+        function makeSelection(string) {
             if (string) {
                 $(".panel").hide();
                 $(".panel:Contains(" + string + ")").show();
-                $("#count").html($(".panel:visible").length + " Намерени записа за '"+string+"'");
+                $("#count").html($(".panel:visible").length + " Намерени записа за '" + string + "'");
                 $search.val('');
                 $cleaner.show();
             }
@@ -103,4 +108,6 @@
     </script>
 </body>
 </html>
+
+
 
