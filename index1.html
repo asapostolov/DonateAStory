@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+		<title>Подари ми история</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Библиотека на проекта "Подари ми история"</h1>
+								<p>"Подари ми история!" е инициатива, в рамките на която доброволци записват аудиокниги за незрящи. Повече за нея можете да научите от <a href="https://podarimiistoria.wordpress.com/" target="_blank">блога ни</a>.</p>
+								<p>За допълнителна информация и връзка с нас, пишете ни на: <script>pr="@"; document.write("<a href='mailto:podariistoria"+pr+"gmail.com'>podariistoria"+pr+"gmail.com</a>"); </script></p>
+                <p>Библиотеката съдържа общо 0 звукови записа на произведения записани и дарени от доброволци за незрящи хора</p>
+            </div>
+            <div class="col-md-12">
+                <label for="search">Търси в библиотеката</label>
+                <input type="text" id="search" />
+                <input type="button" id="searchTrigger" value="Търси" />
+                <input type="button" id="searchCleaner" value="Изчисти Търсенето" style="display:none" />
+                <div id="count"></div>
+            </div>
+            <div class="col-md-9">
+						</div>
+						<div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script>
+        jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+        var $list = $("ul");
+        var $trigger = $("#searchTrigger");
+        var $cleaner = $("#searchCleaner");
+        var $search = $("#search");
+        $search.on("keypress", function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                makeSelection($search.val());
+            }
+        });
+        $trigger.on("click", function () {
+            makeSelection($search.val());
+        });
+        $cleaner.on("click", function () {
+            $(".panel").show();
+            $("#count").html('');
+            $cleaner.hide();
+        });
+        function makeSelection(string) {
+            if (string) {
+                $(".panel").hide();
+                $(".panel:Contains(" + string + ")").show();
+                $("#count").html($(".panel:visible").length + " Намерени записа за '" + string + "'");
+                $search.val('');
+                $cleaner.show();
+            }
+        }
+        $(".author").on("click", function () {
+            makeSelection($(this).data('value'));
+        });
+
+    </script>
+</body>
+</html>
+

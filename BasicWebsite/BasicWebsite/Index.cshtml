@@ -1,15 +1,13 @@
 ﻿@using BasicWebsite;
 @using reader = BasicWebsite.RecordingsReader;
-
 @{
     Layout = null;
     reader.InitFromFile();
     reader.InitVersion2();
     reader.InitFileLinks();
     var baseLink = "http://podarimiistoria.net/knigi_zip/";
-    var showLinks = true;
+    var showLinks = false;
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -23,7 +21,12 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Библиотека на проекта "Подари ми история"</h1>
-                <p>Библиотеката съдържа общо @reader.FileData.Count звукови записа на произведения записани и дарени от доброволци за незрящи хора</p>
+                <p>„Подари ми история!“ е инициатива, в рамките на която доброволци записват аудиокниги за незрящи. Повече за нея можете да научите от <a href="https://podarimiistoria.wordpress.com/" target="_blank">блога ни</a>.</p>
+                <p>
+                    За допълнителна информация и връзка с нас, пишете ни на:
+                    <a href="mailto:podariistoria@gmail.com">podariistoria@gmail.com</a>
+                </p>
+                <p>Библиотеката съдържа общо @reader.FileData.Max( x => x.Number ) звукови записа на произведения записани и дарени от доброволци за незрящи хора</p>
             </div>
             <div class="col-md-12">
                 <label for="search">Търси в библиотеката</label>
@@ -43,9 +46,9 @@
                                     @item.Lines[0] @item.Lines[1]
                                 </a>
                             } else {
-                                    @item.Lines[0] @item.Lines[1]
+                                @item.Lines[0] @item.Lines[1]
                             }
-                            
+
                             @foreach ( var row in item.Lines.Skip( 2 ) ) {
                                 <div>@row</div>
                             }

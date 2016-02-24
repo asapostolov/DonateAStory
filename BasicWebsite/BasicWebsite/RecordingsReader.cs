@@ -127,7 +127,7 @@ namespace BasicWebsite {
                     item.FilesCount = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
-                if ( line.StartsWith( "Забележки" ) ) {
+                if ( line.StartsWith( "Забележки" ) && line.IndexOf( ":" )>-1 ) {
                     item.Notes = line.Substring( line.IndexOf( ":" ) ).Trim( ' ', ':' );
                     continue;
                 }
